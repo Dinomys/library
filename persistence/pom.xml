@@ -11,5 +11,13 @@
 
     <artifactId>persistence</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.sda</groupId>
+            <artifactId>domain</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
 
 </project>
