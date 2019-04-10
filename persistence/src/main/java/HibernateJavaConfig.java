@@ -20,8 +20,8 @@ public class HibernateJavaConfig implements HibernateConfig {
                 Properties settings = new Properties();
                 settings.put(Environment.DRIVER, "com.mysql.jdbc.Driver");
                 /*ENTER DB NAME, USERNAME, PASSWORD*/
-                settings.put(Environment.URL, "jdbc:mysql://localhost:3306/___________?allowPublicKeyRetrieval=true&useSSL=false");
-                settings.put(Environment.USER, "______");
+                settings.put(Environment.URL, "jdbc:mysql://localhost:3306/library?allowPublicKeyRetrieval=true&useSSL=false");
+                settings.put(Environment.USER, "root");
                 settings.put(Environment.PASS, "_______");
                 settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
                 settings.put(Environment.SHOW_SQL, "true");
