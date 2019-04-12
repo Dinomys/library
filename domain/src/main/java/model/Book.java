@@ -23,8 +23,8 @@ public class Book {
     Date releaseDate;
     String summary;
     String title;
-    @ManyToOne
-    @JoinColumn (name = "author_id")
+   // @ManyToOne
+   // @JoinColumn (name = "author_id")
     int authorId;
 }
 

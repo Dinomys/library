@@ -3,6 +3,7 @@ import dao.Impl.BookDao;
 import model.Book;
 import org.hibernate.SessionFactory;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 public class Main {
