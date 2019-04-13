@@ -20,5 +20,8 @@ public class Main {
         List<Book> books = bookDao.listBooks();
         System.out.println(books);
 
+        bookDao.showBookById(1);
+
+        config.shutdown();
     }
 }

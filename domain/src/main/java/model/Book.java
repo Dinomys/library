@@ -25,6 +25,6 @@ public class Book {
     String title;
    // @ManyToOne
    // @JoinColumn (name = "author_id")
-    int authorId;
+    long authorId;
 }
 
