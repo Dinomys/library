@@ -9,7 +9,7 @@
 </head>
 <body>
 <h2>Book directory</h2>
-<form action="/index" method get>
+<form action="/index" method post>
 <table class="table table-hover">
     <thead>
     <tr>
@@ -38,6 +38,10 @@
     </c:forEach>
     </tbody>
 </table>
+    <button type="submit" class="btn btn-primary" name="action" value="add">Add</button>
+    <button type="submit" class="btn btn-secondary" name="action" value="details">Details</button>
+    <button type="submit" class="btn btn-success" name="action" value="edit">Edit</button>
+    <button type="submit" class="btn btn-danger" name="action" value="delete"> Delete</button>
 </form>
 </body>
 </html>
