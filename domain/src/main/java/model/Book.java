@@ -17,7 +17,7 @@ public class Book {
     @Column (name = "id_book")
     long id;
 
-    @OneToMany(mappedBy = "book")
+    @OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
     List<Borrow> borrows;
 
     boolean borrow;
@@ -28,6 +28,7 @@ public class Book {
     @Column (name = "release_date")
     @Temporal(TemporalType.DATE)
     Date releaseDate;
+    @Column (length = 400)
     String summary;
     String title;
 

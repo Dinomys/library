@@ -1,10 +1,13 @@
 package model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "borrowerDetails")
 public class BorrowerDetails {

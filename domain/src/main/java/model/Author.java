@@ -1,11 +1,14 @@
 package model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "authors")
 public class Author {
@@ -14,7 +17,7 @@ public class Author {
     @Column (name = "id_authors")
     long id;
 
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
     List<Book> books;
 
     @Column (name = "first_name")
