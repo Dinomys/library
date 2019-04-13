@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class BookValidator {
 
-    private static final Pattern REGEXPATTERN = Pattern.compile("^(([0-9]-?){13})$");
+    private static final Pattern REGEXPATTERN = Pattern.compile("^(([0-9]-?){10})(([0-9]-?){3})?$");
 
     protected boolean isbnValidator(String isbn) {
         Matcher matcher = REGEXPATTERN.matcher(isbn);
