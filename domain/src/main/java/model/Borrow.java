@@ -2,11 +2,27 @@ package model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @Entity
-@Table (name = "borrow")
+@Table(name = "borrow")
 public class Borrow {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_borrow")
+    long id;
+
+    @ManyToOne
+    @JoinColumn(name = "book_id")
+    Book book;
+
+    @ManyToOne
+    @JoinColumn(name = "borrower_id")
+    Borrower borrower;
+
+    @Column (name = "rental_date")
+    @Temporal(TemporalType.DATE)
+    Date rentalDate;
 }

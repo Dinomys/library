@@ -1,4 +1,4 @@
-import model.Book;
+import model.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -29,7 +29,11 @@ public class HibernateJavaConfig implements HibernateConfig {
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
                 settings.put(Environment.HBM2DDL_AUTO, "create");
                 configuration.setProperties(settings);
+                configuration.addAnnotatedClass(Author.class);
                 configuration.addAnnotatedClass(Book.class);
+                configuration.addAnnotatedClass(Borrow.class);
+                configuration.addAnnotatedClass(Borrower.class);
+                configuration.addAnnotatedClass(BorrowerDetails.class);
 
 
                 serviceRegistry = new StandardServiceRegistryBuilder()

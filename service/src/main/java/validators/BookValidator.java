@@ -12,4 +12,3 @@ public class BookValidator {
         return matcher.matches();
     }
 }
-
