@@ -1,30 +1,41 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="d" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
+<head>
+    <title>Book directory</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" type="text/css"
+          rel="stylesheet">
+</head>
 <body>
 <h2>Book directory</h2>
-<form>
+<form action="/index" method get>
 <table class="table table-hover">
     <thead>
     <tr>
-        <th scope="col"> </th>
         <th scope="col">#</th>
+        <th scope="col"></th>
         <th scope="col">Title</th>
         <th scope="col">Author</th>
         <th scope="col">ISBN</th>
         <th scope="col">Category</th>
         <th scope="col">Published date</th>
-        <th scope="col">Status</th>
+        <th scope="col">Borrowed to</th>
     </tr>
     </thead>
     <tbody>
-    <c:forEach var="book" items="${requestScopebooks}" varStatus="loop">
+    <c:forEach var="book" items="${requestScope.books}" varStatus="loop">
         <tr>
             <th scope ="row">${loop.index + 1}</th>
+            <td><input class="form-check-input" type="radio" name="id" value="${book.id}"></td>
             <td>${book.title}</td>
-            <td><input class="form-check-input" type="radio" name="bookId" value="${book.id}"></td>
+            <td>${book.author}</td>
+            <td>${book.isbn}</td>
+            <td>${book.category}</td>
+            <td>${book.published}</td>
+            <td>${not empty book.borrowedBy ? book.borrowedBy : '-'}</td>
         </tr>
     </c:forEach>
-
     </tbody>
 </table>
 </form>

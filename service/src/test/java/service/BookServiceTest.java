@@ -1,6 +1,8 @@
 package service;
 
 
+import model.Book;
+import model.Borrower;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -10,5 +12,7 @@ public class BookServiceTest {
 
     @Test
     public void currentBorrowerName() {
+        Book book = new Book ();
+        book.setBorrow(true);
     }
 }
