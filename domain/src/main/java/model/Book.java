@@ -9,8 +9,6 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-@Getter
-@Setter
 @Entity
 @Table(name = "books")
 public class Book {
@@ -19,7 +17,7 @@ public class Book {
     @Column (name = "id_book")
     long id;
 
-    @OneToMany(mappedBy = "borrow")
+    @OneToMany(mappedBy = "book")
     List<Borrow> borrows;
 
     boolean borrow;
@@ -36,4 +34,9 @@ public class Book {
     @ManyToOne
     @JoinColumn (name = "author_id")
     Author author;
+
+public boolean isBorrow(){
+    return this.borrow;
+}
+
 }

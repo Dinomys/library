@@ -25,4 +25,8 @@ public class Author {
 
     @Column (name = "birth_place")
     String birthPlace;
+
+public String getAuthorName (){
+    return this.firstName + " " + this.lastName;
+}
 }

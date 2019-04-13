@@ -20,10 +20,14 @@ public class Borrower {
     @Column(name = "last_name")
     String lastName;
 
-    @OneToMany(mappedBy = "borrow")
+    @OneToMany(mappedBy = "borrower")
     List<Borrow> borrows;
 
     @OneToOne
     @JoinColumn(name = "id_borrower_details")
     BorrowerDetails borrowerDetails;
+
+    public String getBorrowerName(){
+        return this.firstName + " " + this.lastName;
+    }
 }
