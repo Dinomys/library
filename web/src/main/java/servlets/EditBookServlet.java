@@ -1,4 +1,8 @@
 package servlets;
 
-public class EditBookServlet {
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+
+@WebServlet ("/edit")
+public class EditBookServlet extends HttpServlet {
 }

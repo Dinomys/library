@@ -1,5 +1,7 @@
 package dao.Impl;
 
+import config.HibernateConfig;
+import config.HibernateJavaConfig;
 import dao.IBookDao;
 import model.Book;
 import org.hibernate.Session;
@@ -17,8 +19,9 @@ public class BookDao<T> implements IBookDao {
 
     private final SessionFactory sessionFactory;
 
-    public BookDao(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
+    public BookDao() {
+        HibernateConfig config = new HibernateJavaConfig();
+        this.sessionFactory = config.getSessionFactory();
     }
 
     @Override

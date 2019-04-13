@@ -1,9 +1,10 @@
+package config;
+
 import dao.IBookDao;
 import dao.Impl.BookDao;
 import model.Book;
 import org.hibernate.SessionFactory;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 
 public class Main {
@@ -12,7 +13,7 @@ public class Main {
         HibernateConfig config = new HibernateJavaConfig();
         SessionFactory sessionFactory = config.getSessionFactory();
 
-        IBookDao bookDao = new BookDao(sessionFactory);
+        IBookDao bookDao = new BookDao();
 
         Book book = new Book();
         bookDao.insertBook(book);

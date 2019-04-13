@@ -1,3 +1,6 @@
+package config;
+
+import config.HibernateConfig;
 import model.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
