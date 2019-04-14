@@ -30,19 +30,19 @@ public class IndexServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String action = (String) req.getParameter("action");
+        String action = req.getParameter("action");
         switch (action) {
             case "add":
                 resp.sendRedirect("/add");
                 break;
             case "delete":
-                resp.sendRedirect("/delete?bookid=" + req.getAttribute("id"));
+                resp.sendRedirect("/delete?bookid=" + req.getParameter("id"));
                 break;
             case "details":
-                resp.sendRedirect("/details?bookid=" + req.getAttribute("id"));
+                resp.sendRedirect("/details?bookid=" + req.getParameter("id"));
                 break;
             case "edit":
-                resp.sendRedirect("/edit?bookid=" + req.getAttribute("id"));
+                resp.sendRedirect("/edit?bookid=" + req.getParameter("id"));
                 break;
             default:
                 req.getRequestDispatcher("index.jsp").forward(req, resp);

@@ -9,7 +9,7 @@
 </head>
 <body>
 <h2>Book directory</h2>
-<form action="/index" method post>
+<form action="/index" method="post">
 <table class="table table-hover">
     <thead>
     <tr>
