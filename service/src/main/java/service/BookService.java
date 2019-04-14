@@ -3,6 +3,7 @@ package service;
 import dao.IBookDao;
 import dao.Impl.BookDao;
 import dto.BookDto;
+import dto.BookDtoExtended;
 import model.Book;
 import model.Borrow;
 import model.Borrower;
@@ -41,4 +42,9 @@ public class BookService {
         return bookDtoList;
     }
 
+    public BookDtoExtended showAllBookDetails (Book book) {
+        return new BookDtoExtended(book.getId(), book.getTitle(), book.getAuthor().getAuthorName(), book.getIsbn(),
+                book.getCategory(), book.getReleaseDate(), currentBorrowerName(book), book.isBorrow(), book.getPages(),
+                book.getSummary());
+    }
 }

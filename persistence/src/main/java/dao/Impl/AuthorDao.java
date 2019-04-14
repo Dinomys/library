@@ -19,9 +19,9 @@ public class AuthorDao<T> implements IAuthorDao {
 
     private final SessionFactory sessionFactory;
 
-    public AuthorDao(SessionFactory sessionFactory) {
+    public AuthorDao() {
         HibernateConfig config = new HibernateJavaConfig();
-        this.sessionFactory = sessionFactory;
+        this.sessionFactory = config.getSessionFactory();
     }
 
     @Override

@@ -14,7 +14,8 @@ public class BorrowerService {
     }
 
     public List<BorrowerDto> listAllBorrowers (){
-        List<Borrower> list = BorrowerDao.listBorrowers();
+        BorrowerDao borrowerDao = new BorrowerDao();
+        List<Borrower> list = borrowerDao.listBorrowers();
         List<BorrowerDto> listAllBorrowers = new ArrayList<BorrowerDto>();
         for (Borrower b : list){
             listAllBorrowers.add(new BorrowerDto(b.getBorrowerName(), b.getId()));
