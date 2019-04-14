@@ -24,8 +24,12 @@ public class BookService {
         this.bookDao = new BookDao();
     }
 
-    public void EditBook(Book book){
+    public void editBook(Book book){
         bookDao.editBook(book);
+    }
+
+    public void addBook(Book book){
+        bookDao.insertBook(book);
     }
 
 
