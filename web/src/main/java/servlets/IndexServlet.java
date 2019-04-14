@@ -1,7 +1,6 @@
 package servlets;
 
 import dto.BookDto;
-import model.Book;
 import service.BookService;
 
 import javax.servlet.ServletException;
@@ -18,11 +17,9 @@ public class IndexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        BookService bookService = new BookService();
+        GetBookHelper helper = new GetBookHelper();
 
-        List<BookDto> books = bookService.books();
-
-        req.setAttribute("books", books);
+        req.setAttribute("books", helper.getBookList());
 
         req.getRequestDispatcher("index.jsp").forward(req, resp);
     }

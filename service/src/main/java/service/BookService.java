@@ -7,13 +7,18 @@ import dto.BookDtoExtended;
 import model.Book;
 import model.Borrow;
 import model.Borrower;
-import org.hibernate.SessionFactory;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class BookService {
+
+    private final IBookDao bookDao;
+
+    public BookService() {
+        this.bookDao = new BookDao();
+    }
+
 
     public String currentBorrowerName(Book book) {
         String borrowerName = null;
@@ -33,7 +38,6 @@ public class BookService {
     }
 
     public List<BookDto> books() {
-        IBookDao bookDao = new BookDao();
         List <Book> books =  bookDao.listBooks();
         List<BookDto> bookDtoList = new ArrayList<BookDto>();
         for (Book b : books) {
@@ -42,7 +46,8 @@ public class BookService {
         return bookDtoList;
     }
 
-    public BookDtoExtended showAllBookDetails (Book book) {
+    public BookDtoExtended showAllBookDetails (long id) {
+        Book book = bookDao.showBookById(id);
         return new BookDtoExtended(book.getId(), book.getTitle(), book.getAuthor().getAuthorName(), book.getIsbn(),
                 book.getCategory(), book.getReleaseDate(), currentBorrowerName(book), book.isBorrow(), book.getPages(),
                 book.getSummary());
