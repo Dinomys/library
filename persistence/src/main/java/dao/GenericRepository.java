@@ -6,7 +6,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import javax.persistence.EntityTransaction;
 import java.lang.reflect.ParameterizedType;
 
 public abstract class GenericRepository<T, K> {
