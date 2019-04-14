@@ -17,18 +17,17 @@ import java.util.List;
 
 public class BorrowerDao implements IBorrowerDao {
 
-    private final SessionFactory sessionFactory;
+    private Session session;
 
     public BorrowerDao() {
-        HibernateConfig config = new HibernateJavaConfig();
-        this.sessionFactory = config.getSessionFactory();
+        this.session = HibernateJavaConfig.getSession();
     }
 
     @Override
     public boolean insertBorrower(Borrower borrower) {
         Transaction transaction = null;
 
-        try (Session session = sessionFactory.openSession()) {
+        try {
 
             transaction = session.beginTransaction();
             session.save(borrower);
@@ -49,7 +48,7 @@ public class BorrowerDao implements IBorrowerDao {
     public boolean removeBorrower(Borrower borrower) {
         Transaction transaction = null;
 
-        try (Session session = sessionFactory.openSession()) {
+        try {
 
             transaction = session.beginTransaction();
             session.delete(borrower);
@@ -69,7 +68,7 @@ public class BorrowerDao implements IBorrowerDao {
     public Borrower showBorrowerById(long id) {
         Transaction transaction = null;
 
-        try (Session session = sessionFactory.openSession()) {
+        try {
 
             transaction = session.beginTransaction();
             Borrower borrower = session.load(Borrower.class, id);
@@ -88,7 +87,7 @@ public class BorrowerDao implements IBorrowerDao {
     @Override
     public List<Borrower> listBorrowers() {
         List<Borrower> borrowerList = new ArrayList<>();
-        try (Session session = sessionFactory.openSession()) {
+        try {
 
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
             CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(Borrower.class);

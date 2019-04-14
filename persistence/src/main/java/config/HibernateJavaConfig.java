@@ -2,6 +2,7 @@ package config;
 
 import config.HibernateConfig;
 import model.*;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -14,15 +15,16 @@ public class HibernateJavaConfig implements HibernateConfig {
 
     private static SessionFactory sessionFactory;
     private static ServiceRegistry serviceRegistry;
+    private static Session session;
 
-    @Override
+/*    @Override
     public SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             try {
                 Configuration configuration = new Configuration();
                 Properties settings = new Properties();
                 settings.put(Environment.DRIVER, "com.mysql.jdbc.Driver");
-                /*ENTER DB NAME, USERNAME, PASSWORD*/
+                *//*ENTER DB NAME, USERNAME, PASSWORD*//*
                 settings.put(Environment.URL, "jdbc:mysql://localhost:3306/library?allowPublicKeyRetrieval=true&useSSL=false");
                 settings.put(Environment.USER, "root");
                 settings.put(Environment.PASS, "Dinomys1!");
@@ -48,6 +50,43 @@ public class HibernateJavaConfig implements HibernateConfig {
             }
         }
         return sessionFactory;
+    }*/
+
+    public static Session getSession (){
+        if (session == null){
+                if (sessionFactory == null) {
+                    try {
+                        Configuration configuration = new Configuration();
+                        Properties settings = new Properties();
+                        settings.put(Environment.DRIVER, "com.mysql.jdbc.Driver");
+                        /*ENTER DB NAME, USERNAME, PASSWORD*/
+                        settings.put(Environment.URL, "jdbc:mysql://localhost:3306/library?allowPublicKeyRetrieval=true&useSSL=false");
+                        settings.put(Environment.USER, "root");
+                        settings.put(Environment.PASS, "Dinomys1!");
+                        settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
+                        settings.put(Environment.SHOW_SQL, "true");
+                        settings.put(Environment.FORMAT_SQL, "true");
+                        settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
+                        settings.put(Environment.HBM2DDL_AUTO, "create");
+                        configuration.setProperties(settings);
+                        configuration.addAnnotatedClass(Author.class);
+                        configuration.addAnnotatedClass(Book.class);
+                        configuration.addAnnotatedClass(Borrow.class);
+                        configuration.addAnnotatedClass(Borrower.class);
+                        configuration.addAnnotatedClass(BorrowerDetails.class);
+
+
+                        serviceRegistry = new StandardServiceRegistryBuilder()
+                                .applySettings(configuration.getProperties())
+                                .build();
+                        sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            session = sessionFactory.openSession();
+        }
+        return session;
     }
 
     @Override

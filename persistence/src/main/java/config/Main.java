@@ -3,6 +3,7 @@ package config;
 import dao.IBookDao;
 import dao.Impl.BookDao;
 import model.Book;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import java.util.List;
@@ -10,8 +11,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        HibernateConfig config = new HibernateJavaConfig();
-        SessionFactory sessionFactory = config.getSessionFactory();
+        Session session = HibernateJavaConfig.getSession();
 
         IBookDao bookDao = new BookDao();
 
@@ -23,6 +23,5 @@ public class Main {
 
         bookDao.showBookById(1);
 
-        config.shutdown();
     }
 }

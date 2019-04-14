@@ -17,18 +17,17 @@ import java.util.List;
 
 public class AuthorDao<T> implements IAuthorDao {
 
-    private final SessionFactory sessionFactory;
+    private Session session;
 
     public AuthorDao() {
-        HibernateConfig config = new HibernateJavaConfig();
-        this.sessionFactory = config.getSessionFactory();
+        this.session = HibernateJavaConfig.getSession();
     }
 
     @Override
     public boolean insertAuthor(Author author) {
         Transaction transaction = null;
 
-        try (Session session = sessionFactory.openSession()) {
+        try {
 
             transaction = session.beginTransaction();
             session.save(author);
@@ -49,7 +48,7 @@ public class AuthorDao<T> implements IAuthorDao {
     public Author showAuthorById(long id) {
         Transaction transaction = null;
 
-        try (Session session = sessionFactory.openSession()) {
+        try {
 
             transaction = session.beginTransaction();
             Author author = session.load(Author.class, id);
@@ -68,7 +67,7 @@ public class AuthorDao<T> implements IAuthorDao {
     @Override
     public List<Author> listAuthors() {
         List<Author> authorList = new ArrayList<Author>();
-        try (Session session = sessionFactory.openSession()) {
+        try {
 
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
             CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(Author.class);

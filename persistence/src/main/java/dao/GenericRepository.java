@@ -1,3 +1,4 @@
+/*
 package dao;
 
 import config.HibernateConfig;
@@ -82,4 +83,4 @@ public abstract class GenericRepository<T, K> {
             }
         }
     }
-}
+}*/

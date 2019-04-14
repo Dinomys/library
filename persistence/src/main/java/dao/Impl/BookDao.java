@@ -17,18 +17,18 @@ import java.util.List;
 
 public class BookDao<T> implements IBookDao {
 
-    private final SessionFactory sessionFactory;
+    private Session session;
 
     public BookDao() {
         HibernateConfig config = new HibernateJavaConfig();
-        this.sessionFactory = config.getSessionFactory();
+        this.session = HibernateJavaConfig.getSession();
     }
 
     @Override
     public boolean insertBook(Book book) {
         Transaction transaction = null;
 
-        try (Session session = sessionFactory.openSession()) {
+        try {
 
             transaction = session.beginTransaction();
             session.save(book);
@@ -48,7 +48,7 @@ public class BookDao<T> implements IBookDao {
     @Override
     public Book editBook(List objects) {
         Transaction transaction = null;
-        try (Session session = sessionFactory.openSession()) {
+        try {
             transaction = session.getTransaction();
             transaction.begin();
             session.merge(objects);
@@ -67,7 +67,7 @@ public class BookDao<T> implements IBookDao {
     public boolean removeBook(Book book) {
         Transaction transaction = null;
 
-        try (Session session = sessionFactory.openSession()) {
+        try {
 
             transaction = session.beginTransaction();
             session.delete(book);
@@ -87,7 +87,7 @@ public class BookDao<T> implements IBookDao {
     public Book showBookById(long id) {
         Transaction transaction = null;
 
-        try (Session session = sessionFactory.openSession()) {
+        try {
 
             transaction = session.beginTransaction();
             Book book = session.load(Book.class, id);
@@ -106,7 +106,7 @@ public class BookDao<T> implements IBookDao {
     @Override
     public List<Book> listBooks() {
         List<Book> bookList = new ArrayList<Book>();
-        try (Session session = sessionFactory.openSession()) {
+        try {
 
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
             CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(Book.class);

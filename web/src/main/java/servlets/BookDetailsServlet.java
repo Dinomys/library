@@ -12,7 +12,7 @@ public class BookDetailsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        GetBookHelper helper = new GetBookHelper();
+        GetBookHelper helper = GetBookHelper.getInstance();
         helper.getBook(req, resp, "details.jsp");
     }
 

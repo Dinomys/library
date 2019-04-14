@@ -17,7 +17,7 @@ public class DeleteBookServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        GetBookHelper helper = new GetBookHelper();
+        GetBookHelper helper = GetBookHelper.getInstance();
         helper.getBook(req, resp, "delete.jsp");
     }
 }
