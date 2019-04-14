@@ -54,7 +54,6 @@ public abstract class GenericRepository<T, K> {
         }
     }
 
-
     public void remove(T entity) {
         Transaction transaction = null;
         try (Session session = sessionFactory.openSession()) {
