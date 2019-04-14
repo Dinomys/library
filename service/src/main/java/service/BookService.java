@@ -24,7 +24,9 @@ public class BookService {
         this.bookDao = new BookDao();
     }
 
-
+    public void EditBook(Book book){
+        bookDao.editBook(book);
+    }
 
 
     public void returnBook(long bookid){
