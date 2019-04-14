@@ -14,8 +14,6 @@
 </head>
 <body>
 <h2>Success!</h2>
-"${book.title}"
-was borrowed by
-"${borrower.name}"
+<a href=/index type="button" class="btn btn-primary">Back to Index</a>
 </body>
 </html>

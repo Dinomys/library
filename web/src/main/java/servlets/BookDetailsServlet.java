@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet ("/details")
+@WebServlet("/details")
 public class BookDetailsServlet extends HttpServlet {
 
     @Override
@@ -29,23 +29,32 @@ public class BookDetailsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
         BookService bookService = GetBookHelper.getInstance().getService();
-        long bookid = Long.valueOf(req.getParameter("bookid"));
-        BorrowService borrowService = new BorrowService();
+        String bookIdStr = req.getParameter("bookid");
+        if (bookIdStr == null) {
+            req.getRequestDispatcher("mustPickBook.jsp").forward(req, resp);
+        } else {
+            long bookid = Long.valueOf(req.getParameter("bookid"));
+            BorrowService borrowService = new BorrowService();
 
-        switch (action) {
-            case "borrow" :
-                long borrowerId = Long.valueOf(req.getParameter("borrowerid"));
-                borrowService.borrowBook(bookid, borrowerId);
-                req.getRequestDispatcher("borrowSuccess.jsp").forward(req, resp);
-                break;
-            case "return":
-                bookService.returnBook(bookid);
-                break;
-            default :
-                req.getRequestDispatcher("/index").forward(req, resp);
-                break;
+            switch (action) {
+                case "borrow":
+                    String borrowerId = req.getParameter("borrowerid");
+                    if(borrowerId != null) {
+                        long borrowerIdLong = Long.valueOf(req.getParameter("borrowerid"));
+                        borrowService.borrowBook(bookid, borrowerIdLong);
+                        req.getRequestDispatcher("borrowSuccess.jsp").forward(req, resp);
+                    } else {
+                        req.getRequestDispatcher("/details").forward(req, resp);
+                    }
+                    break;
+                case "return":
+                    bookService.returnBook(bookid);
+                    break;
+                default:
+                    req.getRequestDispatcher("/index").forward(req, resp);
+                    break;
+            }
+
         }
-
-
     }
 }
