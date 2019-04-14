@@ -9,7 +9,7 @@ public interface IAuthorDao {
 
     boolean insertAuthor(Author author);
 
-    Author showBookById(long id);
+    Author showAuthorById(long id);
 
     List<Author> listAuthors();
 }

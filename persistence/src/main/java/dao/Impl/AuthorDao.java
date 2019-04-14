@@ -46,7 +46,7 @@ public class AuthorDao<T> implements IAuthorDao {
     }
 
     @Override
-    public Author showBookById(long id) {
+    public Author showAuthorById(long id) {
         Transaction transaction = null;
 
         try (Session session = sessionFactory.openSession()) {
@@ -79,7 +79,6 @@ public class AuthorDao<T> implements IAuthorDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return authorList;
     }
 }

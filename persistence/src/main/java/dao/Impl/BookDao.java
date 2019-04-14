@@ -47,14 +47,27 @@ public class BookDao<T> implements IBookDao {
 
     @Override
     public Book editBook(List objects) {
-        return null;
+        Transaction transaction = null;
+        try (Session session = sessionFactory.openSession()) {
+            transaction = session.getTransaction();
+            transaction.begin();
+            session.merge(objects);
+            transaction.commit();
+            return (Book) objects;
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            return null;
+        }
     }
+
 
     @Override
     public boolean removeBook(Book book) {
         Transaction transaction = null;
 
-        try (Session session = sessionFactory.openSession()){
+        try (Session session = sessionFactory.openSession()) {
 
             transaction = session.beginTransaction();
             session.delete(book);

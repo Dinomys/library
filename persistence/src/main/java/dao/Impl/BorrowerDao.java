@@ -1,34 +1,107 @@
 package dao.Impl;
 
+import config.HibernateConfig;
+import config.HibernateJavaConfig;
 import dao.IBorrowerDao;
 import model.Book;
+import model.Borrow;
 import model.Borrower;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BorrowerDao implements IBorrowerDao {
-    @Override
-    public boolean insertBorrower(Borrower borrower) {
-        return false;
+
+    private final SessionFactory sessionFactory;
+
+    public BorrowerDao() {
+        HibernateConfig config = new HibernateJavaConfig();
+        this.sessionFactory = config.getSessionFactory();
     }
 
     @Override
-    public Borrower editBorrower(List objects) {
-        return null;
+    public boolean insertBorrower(Borrower borrower) {
+        Transaction transaction = null;
+
+        try (Session session = sessionFactory.openSession()) {
+
+            transaction = session.beginTransaction();
+            session.save(borrower);
+            transaction.commit();
+            return true;
+
+        } catch (Exception e) {
+
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
     public boolean removeBorrower(Borrower borrower) {
-        return false;
+        Transaction transaction = null;
+
+        try (Session session = sessionFactory.openSession()) {
+
+            transaction = session.beginTransaction();
+            session.delete(borrower);
+            transaction.commit();
+            return true;
+
+        } catch (Exception e) {
+
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            return false;
+        }
     }
 
     @Override
-    public Book showBorrowerById(long id) {
-        return null;
+    public Borrower showBorrowerById(long id) {
+        Transaction transaction = null;
+
+        try (Session session = sessionFactory.openSession()) {
+
+            transaction = session.beginTransaction();
+            Borrower borrower = session.load(Borrower.class, id);
+            transaction.commit();
+            return borrower;
+
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
-    public List<Book> listBorrowers() {
-        return null;
+    public List<Borrower> listBorrowers() {
+        List<Borrower> borrowerList = new ArrayList<>();
+        try (Session session = sessionFactory.openSession()) {
+
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(Book.class);
+            Root<Borrower> root = criteriaQuery.from(Borrower.class);
+            Query<Borrower> query = session.createQuery(criteriaQuery);
+            borrowerList = query.getResultList();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return borrowerList;
     }
 }
