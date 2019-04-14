@@ -3,8 +3,6 @@ package dao.Impl;
 import config.HibernateConfig;
 import config.HibernateJavaConfig;
 import dao.IBorrowerDao;
-import model.Book;
-import model.Borrow;
 import model.Borrower;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -93,7 +91,7 @@ public class BorrowerDao implements IBorrowerDao {
         try (Session session = sessionFactory.openSession()) {
 
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-            CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(Book.class);
+            CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(Borrower.class);
             Root<Borrower> root = criteriaQuery.from(Borrower.class);
             Query<Borrower> query = session.createQuery(criteriaQuery);
             borrowerList = query.getResultList();
