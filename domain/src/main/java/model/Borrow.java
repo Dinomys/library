@@ -7,8 +7,6 @@ import java.util.Date;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name = "borrow")
 public class Borrow {
@@ -28,4 +26,10 @@ public class Borrow {
     @Column (name = "rental_date")
     @Temporal(TemporalType.DATE)
     Date rentalDate;
+
+    public Borrow(Book book, Borrower borrower, Date rentalDate) {
+        this.book = book;
+        this.borrower = borrower;
+        this.rentalDate = rentalDate;
+    }
 }

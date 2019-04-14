@@ -2,18 +2,20 @@
   Created by IntelliJ IDEA.
   User: hanna
   Date: 14/04/2019
-  Time: 09:34
+  Time: 14:33
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>No book chosen</title>
+    <title>Success</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" type="text/css"
           rel="stylesheet">
 </head>
 <body>
-<h2>You did not choose a book. Please make your choice first</h2>
-<a href="/index" type="button" class="btn btn-primary">Back to Index</a>
+<h2>Success!</h2>
+"${book.title}"
+was borrowed by
+"${borrower.name}"
 </body>
 </html>

@@ -46,19 +46,17 @@ public class BookDao<T> implements IBookDao {
     }
 
     @Override
-    public Book editBook(List objects) {
+    public void editBook(Book book) {
         Transaction transaction = null;
         try {
             transaction = session.getTransaction();
             transaction.begin();
-            session.merge(objects);
+            session.merge(book);
             transaction.commit();
-            return (Book) objects;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            return null;
         }
     }
 

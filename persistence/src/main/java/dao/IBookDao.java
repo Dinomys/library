@@ -8,7 +8,7 @@ public interface IBookDao<T> {
 
     boolean insertBook(Book book);
 
-    Book editBook(List<T> objects);
+    void editBook(Book book);
 
     boolean removeBook(Book book);
 

@@ -1,5 +1,12 @@
 package servlets;
 
+import dao.Impl.BookDao;
+import dao.Impl.BorrowerDao;
+import model.Book;
+import service.BookService;
+import service.BorrowService;
+import service.BorrowerService;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,12 +20,32 @@ public class BookDetailsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         GetBookHelper helper = GetBookHelper.getInstance();
+        BorrowerService borrowerService = new BorrowerService();
+        req.setAttribute("borrowers", borrowerService.listAllBorrowers());
         helper.getBook(req, resp, "details.jsp");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-/*        GetBookHelper helper = new GetBookHelper();
-        helper.getBook(req, resp, "details.jsp");*/
+        String action = req.getParameter("action");
+        BookService bookService = GetBookHelper.getInstance().getService();
+        long bookid = Long.valueOf(req.getParameter("bookid"));
+        BorrowService borrowService = new BorrowService();
+
+        switch (action) {
+            case "borrow" :
+                long borrowerId = Long.valueOf(req.getParameter("borrowerid"));
+                borrowService.borrowBook(bookid, borrowerId);
+                req.getRequestDispatcher("borrowSuccess.jsp").forward(req, resp);
+                break;
+            case "return":
+                bookService.returnBook(bookid);
+                break;
+            default :
+                req.getRequestDispatcher("/index").forward(req, resp);
+                break;
+        }
+
+
     }
 }

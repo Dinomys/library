@@ -30,12 +30,18 @@ public class GetBookHelper {
         return bookService.books();
     }
 
+    public BookService getService (){
+        return bookService;
+    }
+
 
     public void getBook(HttpServletRequest req, HttpServletResponse resp, String destination) throws ServletException, IOException {
-    if (req.getParameter("bookid") != null) {
+
+        if (req.getParameter("bookid") != null) {
         BookDtoExtended book = bookService.showAllBookDetails(Long.valueOf(req.getParameter("bookid")));
         req.setAttribute("book", book);
         req.getRequestDispatcher(destination).forward(req, resp);
+
     } else {
         req.getRequestDispatcher("mustPickBook.jsp").forward(req, resp);
     }
