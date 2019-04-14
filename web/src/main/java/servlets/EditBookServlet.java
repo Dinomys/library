@@ -17,8 +17,7 @@ public class EditBookServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getAttribute("bookid") != null) {
-
-        } else {}
+        GetBookHelper helper = new GetBookHelper();
+        helper.getBook(req, resp, "edit.jsp");
     }
 }

@@ -10,5 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class BorrowerDto {
     String name;
+    long id;
 
 }
