@@ -70,7 +70,7 @@ public abstract class GenericRepository<T, K> {
 
     public void removeById(K id) {
         Transaction transaction = null;
-        try (Session session = sessionFactory.openSession() {
+        try (Session session = sessionFactory.openSession()) {
             transaction = session.getTransaction();
             transaction.begin();
             T entityToRemove = read(id);
