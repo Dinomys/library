@@ -18,7 +18,7 @@ import java.util.List;
 
 public class BookService {
 
-    private final IBookDao bookDao;;
+    private final IBookDao bookDao;
 
     public BookService() {
         this.bookDao = new BookDao();
